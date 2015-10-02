@@ -228,7 +228,7 @@ Whereas on a Xeon Phi 7120 it would be
           <Sz>2</Sz>
           <PadXY>1</PadXY>                        <!-- PadXY and PadXYZ padding factors -->
           <PadXYZ>0</PadXYZ>
-          <MinCt>2</MinCt>                             <!-- Ct at start -- no of temporal blocks. Set equal to no of sockets -->
+          <MinCt>2</MinCt>                             <!-- Ct at start -- no of temporal blocks. Set EQUAL to no of sockets -->
           <RsdToleranceFactor>5.0</RsdToleranceFactor> <!-- tolerate slack between iterated and true residua, e,g, due to preconditioning etc -->
           <Tune>true</Tune>                            <!-- tune BLAS routines prior to solve -->
         </InvertParam>

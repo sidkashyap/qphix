@@ -11,7 +11,7 @@ using namespace QDP;
 namespace Assertions { 
   template<typename T>
   inline 
-  void assertEquals(const T& t1, const T& t2) {
+  void assertEQUALs(const T& t1, const T& t2) {
     if ( t1 != t2 ) { 
       throw std::exception();
     }
@@ -26,7 +26,7 @@ namespace Assertions {
 
   template<typename T>
   inline
-  void assertNotEquals(const T& t1, const T& t2) { 
+  void assertNotEQUALs(const T& t1, const T& t2) { 
     if( t1 == t2 ) { 
       throw std::exception();
     }

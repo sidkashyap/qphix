@@ -102,9 +102,9 @@ dnl with QDP -- QDP will override everything else
 dnl since a parallel QDP will know its architecture
 dnl precition and have all the flags for QMP set already
 dnl in its CXXFLAGS etc etc
-dnl 
+dnl
 dnl This flag and all the other flags are complimentary
-dnl to each other therefore. Also --with-qdp is also 
+dnl to each other therefore. Also --with-qdp is also
 dnl passed down the command line when compiling Chroma,
 dnl so a sub-configure will also work
 dnl we can also put the QDP++ packers in here too...
@@ -131,18 +131,18 @@ AC_ARG_ENABLE(proc,
 dnl dnl ******************** DONE WITH USER INPUT *********************
 dnl dnl ***        Now Configuration                               ****
 dnl dnl ***************************************************************
-dnl 
+dnl
 dnl     ***************************************************************
 dnl     ***       There are two distinct branches depending         ***
 dnl     ***      on whether we are compiling with QDP++ or not      ***
 dnl     ***************************************************************
 
-dnl 
+dnl
 
 
-if test "X${QDPXX_GIVEN}X" = "XyesX"; then 
-     dnl Find the QDP++ config program 
-     if test "X${QDPXX_HOME}X" = "XX" ; 
+if test "X${QDPXX_GIVEN}X" = "XyesX"; then
+     dnl Find the QDP++ config program
+     if test "X${QDPXX_HOME}X" = "XX" ;
      then
 	AC_PATH_PROG(QDPXX_CONFIG, [qdp++-config], [])
      else
@@ -156,7 +156,7 @@ if test "X${QDPXX_GIVEN}X" = "XyesX"; then
      AC_MSG_NOTICE([Found QDP++ configuration program ${QDPXX_CONFIG}])
      AC_MSG_CHECKING([if QDP++ uses checkerboarded layout])
      layout=`${QDPXX_CONFIG} --layout`
-     if test "X${layout}X" == "Xcb2X" -o "X${layout}X" == "Xcb3dX" ; then 
+     if test "X${layout}X" == "Xcb2X" -o "X${layout}X" == "Xcb3dX" ; then
 	AC_MSG_RESULT([yes])
      else
         AC_MSG_RESULT([no])
@@ -175,7 +175,7 @@ if test "X${QDPXX_GIVEN}X" = "XyesX"; then
 
      QDPXX_ND="`${QDPXX_CONFIG} --Nd`"
      AC_MSG_NOTICE([QDP++ spacetime dimension: ${QDPXX_ND}])
-     
+
      QDPXX_NC="`${QDPXX_CONFIG} --Nc`"
      AC_MSG_NOTICE([QDP++ number of colors: ${QDPXX_NC}])
 
@@ -187,7 +187,7 @@ if test "X${QDPXX_GIVEN}X" = "XyesX"; then
      AC_MSG_NOTICE([QDP++ has parallel arch: ${PARALLEL_ARCH} ] )
 
      dnl This function is defined in acinclude.m4
-     dnl it tries to try to compile the program 
+     dnl it tries to try to compile the program
      PAC_QDPXX_LINK_CXX_FUNC(
 	${QPHIX_AUX_CFLAGS},
 	${QPHIX_AUX_LDFLAGS},
@@ -199,20 +199,20 @@ if test "X${QDPXX_GIVEN}X" = "XyesX"; then
      )
 
      AC_MSG_CHECKING([if we can compile/link a simple QDP++ program])
-     if test "X${qdpxx_link_ok}X" = "XyesX" ; then 
+     if test "X${qdpxx_link_ok}X" = "XyesX" ; then
 	AC_MSG_RESULT(yes)
-     else 
+     else
 	AC_MSG_RESULT(no)
 	AC_MSG_ERROR([Cannot compile/link a program with QDP++.
     Use --with-qdp++=<dir> to select a working version.])
-    fi 
+    fi
 
 
 
     dnl *********************************************************
     dnl ***              end of section with QDP++            ***
     dnl *********************************************************
-else 
+else
      dnl ***************************************************************
      dnl *** Section without QDP++ -- Need to check for QMP possibly ***
      dnl ***************************************************************
@@ -245,7 +245,7 @@ else
 
 		   AC_SUBST(QPHIX_AUX_LIBS,    "`${QMP_CONFIG} --libs`")
 		   AC_MSG_NOTICE([QMP libraries flags: ${QPHIX_AUX_LIBS}])
-		else 
+		else
 		   AC_MSG_WARN([QMP configuration program qmp-config not found.])
 		   AC_MSG_WARN([Set environment variables QMP_CFLAGS QMP_LDFAGS QMP_LIBS before configure])
 		fi
@@ -261,7 +261,7 @@ else
 			[qmp_link_ok=yes],
 			[qmp_link_ok=no]
 		)
-		
+
 		AC_MSG_CHECKING([if we can compile/link of a simple QMP C program])
 		if test "X${qmp_link_ok}X" = "XyesX" ; then
 		   AC_MSG_RESULT(yes)
@@ -285,9 +285,9 @@ dnl ************************************************************************
 case ${PARALLEL_ARCH} in
 scalar)
 	AC_DEFINE_UNQUOTED(QPHIX_SCALAR, [1], [Scalar Arch])
-	if test "X${USE_FAKE_COMMS}X" = "XyesX"; 
+	if test "X${USE_FAKE_COMMS}X" = "XyesX";
 	then
-	   AC_MSG_NOTICE([ Going to use Fake comms ])	
+	   AC_MSG_NOTICE([ Going to use Fake comms ])
 	   AC_DEFINE_UNQUOTED(QPHIX_DO_COMMS,[1], [Do the actual comms])
    	   AC_DEFINE_UNQUOTED(QPHIX_FAKE_COMMS, [1], [Fake Comms])
 	else
@@ -296,14 +296,14 @@ scalar)
 	;;
 parscalar)
 	AC_DEFINE_UNQUOTED(QPHIX_PARSCALAR, [1], [Parscalar Arch])
-	if test "X${USE_FAKE_COMMS}X" = "XyesX"; 
-	then	
+	if test "X${USE_FAKE_COMMS}X" = "XyesX";
+	then
       	   AC_MSG_ERROR([Cannot use parscalar arch with fake comms])
 	else
 	   AC_MSG_NOTICE([ Regular QMP COMMS ])
     	   AC_DEFINE_UNQUOTED(QPHIX_DO_COMMS,[1], [Do the actual comms])
 	   AC_DEFINE_UNQUOTED(QPHIX_QMP_COMMS,[1], [QMP Comms])
-	fi					   
+	fi
 	;;
 *)
 	AC_MSG_ERROR([Unsupported parallel arch])
@@ -333,7 +333,7 @@ case ${SOALEN} in
 esac
 
 case ${USE_CEAN} in
-yes) 
+yes)
 	AC_MSG_NOTICE([Enabling Cilk Notation Use])
 	AC_DEFINE_UNQUOTED(QPHIX_USE_CEAN,[1], [CEAN is on])
 	;;
@@ -342,7 +342,7 @@ yes)
 esac
 
 case ${USE_MM_MALLOC} in
-yes) 
+yes)
 	AC_MSG_NOTICE([Enabling _mm_malloc use])
 	AC_DEFINE_UNQUOTED(QPHIX_USE_MM_MALLOC,[1], [MM_MALLOC is on])
 	;;
@@ -366,15 +366,15 @@ fi
 build_qpx="no"
 
 case ${proc} in
-AVX|avx) 
+AVX|avx)
 	AC_DEFINE([QPHIX_AVX_SOURCE],[1], [ Generate AVX Specializations ])
 	AC_DEFINE([QPHIX_LLC_CACHE_ALIGN], [64], [ L2 Cache alignment ] )
 
 	AC_MSG_NOTICE([Configuring AVX Specializations ])
 	if test $SOALEN -gt 8;
-	then 
+	then
 	  AC_MSG_ERROR([Cannot have SOALEN more than 8 for AVX]);
-	fi		       	    
+	fi
 ;;
 MIC|mic)
 	AC_DEFINE([QPHIX_MIC_SOURCE],[1], [ Generate MIC Specializations ])
@@ -386,14 +386,14 @@ SCALAR|scalar)
 	AC_DEFINE([QPHIX_SCALAR_SOURCE],[1], [ Generate Scalar Specializations ])
 	AC_DEFINE([QPHIX_LLC_CACHE_ALIGN], [64], [ L2 Cache alignment ] )
 	AC_MSG_NOTICE([Configuring Scalar Specializations ])
-;;        
+;;
 QPX|qpx)
 	AC_DEFINE([QPHIX_QPX_SOURCE],[1], [ Generate QPX Specializations ])
 	AC_DEFINE([QPHIX_LLC_CACHE_ALIGN], [128], [ L2 Cache alignment ] )
 	AC_MSG_NOTICE([Configuring QPX Specializations ])
 	if test $SOALEN -ne 4;
 	then
-	  AC_MSG_ERROR([Cannot have SOALEN not equal to 4 for QPX]);
+	  AC_MSG_ERROR([Cannot have SOALEN not EQUAL to 4 for QPX]);
 	fi
 	build_qpx="yes"
 ;;

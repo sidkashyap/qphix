@@ -1,3 +1,10 @@
+#CMAKE build version to integrate this code into the DiRAC repo
+#replicates the work done in the original QPHIX build system - autotools
+
+#We set the variables in CMakeLists.txt instead of parsing arguments at this stage
+#Contact DiRAC Benchmark team for any further questions
+
+
 cmake_minimum_required (VERSION 2.6)
 project(qphix C CXX)
 #AC_CONFIG_AUX_DIR(config)
@@ -20,8 +27,15 @@ SET(QDPXX_GIVEN "no")
 
 SET(proc "AVX")
 
+
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -openmp -g -O2 -finline-functions -std=c++11 -mavx  -Drestrict=__restrict__ ")
 set(CMAKE_C_CFLAGS "${CMAKE_C_CFLAGS} -openmp -g  -O2 -std=c99 -mavx -Drestrict=__restrict__ ")
+
+FIND_PACKAGE(OpenMP)
+  IF(OPENMP_FOUND)
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+  ENDIF()
 
 
 if(${QDPXX_GIVEN} STREQUAL "yes")

@@ -1,2 +1,0 @@
-/Users/sid/Work/qphix/build_one/tests/CMakeFiles/time_dslash_noqdp.dir
-/Users/sid/Work/qphix/build_one/lib/CMakeFiles/qphix_solver.dir

@@ -8,7 +8,7 @@ SET(SOALEN 8)
 
 SET(USE_CEAN "no")
 
-SET(USE_MM_MALLOC "yes")
+SET(USE_MM_MALLOC "no")
 
 SET(build_clover "no")
 
@@ -18,9 +18,10 @@ SET( qmt_enabled "no")
 
 SET(QDPXX_GIVEN "no")
 
-SET(proc "NONE")
+SET(proc "AVX")
 
-SET(CMAKE_CXX_FLAGS "-std=c++11")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -openmp -g -O2 -finline-functions -std=c++11 -mavx  -Drestrict=__restrict__ ")
+set(CMAKE_C_CFLAGS "${CMAKE_C_CFLAGS} -openmp -g  -O2 -std=c99 -mavx -Drestrict=__restrict__ ")
 
 
 if(${QDPXX_GIVEN} STREQUAL "yes")
@@ -91,7 +92,7 @@ if(${proc} STREQUAL "AVX" OR ${proc} STREQUAL "avx")
   add_definitions(-DQPHIX_AVX_SOURCE=1)
   add_definitions(-DQPHIX_LLC_CACHE_ALIGN=64)
   MESSAGE("Configuring AVX Specializations")
-  if(${SOALEN} greater 8)
+  if(${SOALEN} GREATER 8)
     MESSAGE(SEND_ERROR "Cannot have SOALEN more than 8 for AVX")
   endif()
 

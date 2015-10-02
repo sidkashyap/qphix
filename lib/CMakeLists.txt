@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project(qphix/lib C CXX)
 
-SET(TOPDIR "../")
+SET(TOPDIR "${CMAKE_SOURCE_DIR}")
 #TOPDIR=@top_srcdir@
 #BUILDDIR=@top_builddir@
 include_directories(${TOPDIR}/include)
@@ -18,4 +18,4 @@ else()
 	SET(libqphix_solver_a_SOURCES ${libqphix_solver_a_SOURCES} ${CMAKE_SOURCE_DIR}/lib/generic_threadbind.cc)
 endif()
 
-add_library(libqphix_solver.a STATIC ${libqphix_solver_a_SOURCES})
+add_library(qphix_solver STATIC ${libqphix_solver_a_SOURCES})

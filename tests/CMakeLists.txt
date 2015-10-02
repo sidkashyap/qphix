@@ -12,11 +12,11 @@ include_directories(${BUILDDIR}/include)
 
 #INCFLAGS=-I@top_srcdir@/include -I@top_builddir@/include
 
-set(CMAKE_CXX_FLAGS "${QPHIX_AUX_CFLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${QPHIX_AUX_CFLAGS}")
 
 #AM_CXXFLAGS=$(INCFLAGS) @QPHIX_AUX_CFLAGS@
 
-set(CMAKE_EXE_LINKER_FLAGS "-L${TOPDIR}/lib ${QPHIX_AUX_LDFLAGS} -lqphix_solver ${QPHIX_AUX_LIBS}")
+set(CMAKE_EXE_LINKER_FLAGS "-L${TOPDIR}/lib ${QPHIX_AUX_LDFLAGS} ${QPHIX_AUX_LIBS}")
 
 #AM_LDFLAGS=-L@top_builddir@/lib @LDFLAGS@ @QPHIX_AUX_LDFLAGS@
 #LDADD = -lqphix_solver @LIBS@ @QPHIX_AUX_LIBS@
@@ -54,7 +54,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-L${TOPDIR}/lib ${QPHIX_AUX_LDFLAGS} -lqphix_solver 
 
 
 add_executable(time_dslash_noqdp 	time_dslash_noqdp.cc 	timeDslashNoQDP.h 	timeDslashNoQDP.cc)
-target_link_libraries(time_dslash_noqdp libqphix_solver_a)
+target_link_libraries(time_dslash_noqdp qphix_solver)
 # time_dslash_noqdp_SOURCES= \
 # 	time_dslash_noqdp.cc \
 # 	timeDslashNoQDP.h \

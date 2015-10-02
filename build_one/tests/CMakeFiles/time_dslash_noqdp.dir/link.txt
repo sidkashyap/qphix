@@ -1,0 +1,1 @@
+/usr/local/bin/g++-5    -openmp -g -O2 -finline-functions -std=c++11 -mavx  -Drestrict=__restrict__   -Wl,-search_paths_first -Wl,-headerpad_max_install_names -L..//lib   CMakeFiles/time_dslash_noqdp.dir/time_dslash_noqdp.cc.o CMakeFiles/time_dslash_noqdp.dir/timeDslashNoQDP.cc.o  -o time_dslash_noqdp  ../lib/libqphix_solver.a 
